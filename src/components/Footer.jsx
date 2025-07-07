@@ -1,10 +1,13 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
+      const { t, i18n } = useTranslation()
+  
   return (
-    <div className='max-w-[1200px] sm:h-[150px] p-12 flex justify-between mx-auto'>
-        <span className='primary-color'>A. MME</span>
-        <p className='text-gray-600'>fotion.voe@goe.com <br /> #webDev2024</p>
+    <div className='max-w-[1200px] sm:h-[150px] p-12 flex justify-between mx-auto sm:mb-0 mb-10'>
+        <span className='primary-color'>{t("footer_title")}</span>
+        <p className='text-gray-600' dangerouslySetInnerHTML={{ __html: t("footer_des") }}/>
     </div>
   )
 }

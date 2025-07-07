@@ -1,0 +1,33 @@
+{
+    "text_name": "Abdo-Mohamed",
+    "home": "Home",
+    "about": "About",
+    "work": "Work",
+    "contact": "Contact",
+    "language": "Language",
+    "hero_title": "M7LAWY 🏴‍☠",
+    "hero_role1": "Frontend Dev",
+    "hero_role2": "Web Designer",
+    "hero_description": "Front-End<br/>React.js, Vue.js, JavaScript (ES6+), Tailwind CSS، Bootstrap<br/>Back-End: Node.js, APIs<br/>Version Control: Git, GitHub",
+    "download_cv": "Download CV",
+    "work_movies": "Movies",
+    "work_leaves": "Designs",
+    "work_restaurant": "Restaurant",
+    "work_arino": "Company",
+    "work_portfolio": "portfolio",
+    "work_live": "Live",
+    "work_description": "Check out some of my work",
+    "text_contact": "Contact Me",
+    "text_contact_whatsapp": "Contact me via WhatsApp",
+    "text_contact_email": "Contact me via Email",
+    "text_contact_linked": "Contact me via LinkedIn",
+    "skills_description": "My<br/>Tech<br/>Stack",
+    "about_title": "About Me",
+    "about_description": "I'm Abdulrahman, a front-end developer specializing in designing and developing websites and e-commerce stores such as Shopify, Wix, Zid, and NicePage. I have experience designing landing pages, landing pages, and large-scale projects, with a focus on improving performance and user experience. I have strong front-end development skills using React.js and Next.js, with proficiency in HTML, CSS, JavaScript, and frameworks like Bootstrap and Tailwind CSS. I also have experience working with Node.js and Strapi to create dynamic and scalable websites. I always strive to deliver clean and organized code, paying attention to the smallest details to ensure a smooth user experience and high performance. I have experience in search engine optimization (SEO) and e-commerce optimization in terms of speed, design, and integration with various tools. I strive to provide professional solutions tailored to clients' needs, whether in designing and customizing templates and themes or building distinct, responsive websites that work efficiently across all devices.",
+    
+
+
+
+    "footer_title": "D. A.M",
+    "footer_des": "Designed & Developed by Abdo-Mohamed"
+}
