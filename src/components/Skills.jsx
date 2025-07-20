@@ -30,7 +30,7 @@ const Skills = () => {
     <div className="max-w-[1200px] mx-auto my-12 overflow-hidden" id="skills">
       <h2 className="text-4xl font-bold pb-4 mb-3 mx-6 primary-color">{t("skills_description")}</h2>
 
-      <div className="relative w-full py-6 bg-black text-gray-400 overflow-hidden border border-gray-600">
+      <div className="relative w-full py-6 text-gray-400 overflow-hidden border border-gray-600">
         <div className={`flex gap-12 w-max items-center px-4 ${isArabic ? "animate-slide-rtl" : "animate-slide-ltr"}`}>
           {repeatedSkills.map((skill, index) => (
             <div key={index} className="flex flex-col items-center min-w-[70px] sm:min-w-[90px] md:min-w-[110px]">

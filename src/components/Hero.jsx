@@ -8,7 +8,7 @@ const Hero = () => {
     const { t, i18n } = useTranslation()
 
     return (
-        <div id='hero' className='grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8 bg-black'>
+        <div id='hero' className='grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8'>
             <div className='col-span-1 sm:col-span-2 px-5'>
 
                 <h1 className='text-white text-4xl sm:text-5xl lg:text-7xl font-extrabold'>
