@@ -12,7 +12,7 @@ const Work = () => {
   return (
     <div className='max-w-[1200px] min-h-[70vh] mx-auto p-5' id='work'>
       <div className='pb-8'>
-        <p className='text-4xl mb-3 font-bold primary-color'>{t("work")}</p>
+        <p className='text-4xl pb-3 font-bold primary-color'>{t("work")}</p>
         <p className='text-gray-400'>{t("work_description")}</p>
       </div>
 

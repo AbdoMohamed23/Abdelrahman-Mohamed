@@ -21,11 +21,39 @@
     "text_contact_whatsapp": "Contact me via WhatsApp",
     "text_contact_email": "Contact me via Email",
     "text_contact_linked": "Contact me via LinkedIn",
-    "skills_description": "My<br/>Tech<br/>Stack",
-    "about_title": "About Me",
+    "skills_description": "My tech stack",
+    "about_title": "About me",
     "about_description": "I'm Abdulrahman, a front-end developer specializing in designing and developing websites and e-commerce stores such as Shopify, Wix, Zid, and NicePage. I have experience designing landing pages, landing pages, and large-scale projects, with a focus on improving performance and user experience. I have strong front-end development skills using React.js and Next.js, with proficiency in HTML, CSS, JavaScript, and frameworks like Bootstrap and Tailwind CSS. I also have experience working with Node.js and Strapi to create dynamic and scalable websites. I always strive to deliver clean and organized code, paying attention to the smallest details to ensure a smooth user experience and high performance. I have experience in search engine optimization (SEO) and e-commerce optimization in terms of speed, design, and integration with various tools. I strive to provide professional solutions tailored to clients' needs, whether in designing and customizing templates and themes or building distinct, responsive websites that work efficiently across all devices.",
+
     
 
+
+    "cv_title": "Veiw CV",
+    "jobTitle": "Frontend Developer",
+    "aboutTextCV": "Frontend developer with strong skills in building responsive web interfaces using React, Tailwind, and JavaScript. Passionate about UI/UX and clean design.",
+    
+    "education": "Education",
+    "edu1": "Delta Higher Institute for Computers and Information – Mansoura",
+    "edu2": "Bachelor of Commerce",
+
+    "skills": "Skills",
+    "experience": "Experience",
+    "exp1": "Frontend Developer – 2023-Present",
+
+    "freelance": "Freelance Projects",
+    "freelance1": "Developed landing pages and custom sections for Shopify stores.",
+    "freelance2": "Built multi-language websites using React and i18next.",
+    "freelance3": "Customized Wix, Shopify, and Nicepage stores based on client needs.",
+    "freelance4": "Implemented sliders, forms, and interactive sections using pure CSS and Liquid.",
+
+    "languages": "Languages",
+    "lang1": "Arabic – Native",
+    "lang2": "English – Professional",
+
+    "certificates": "Certificates",
+    "cert1": "Frontend Development Diploma",
+    "cert2": "FreeCodeCamp Frontend Certificate",
+    "cert3": "Google UX Certificate",
 
 
     "footer_title": "D. A.M",

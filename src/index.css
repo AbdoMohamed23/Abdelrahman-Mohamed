@@ -26,3 +26,40 @@ body {
   overscroll-behavior: none;
   overflow: hidden;
 }
+
+.buttonCV {
+  color: #4d4d4d;
+  padding: 5px 20px;
+  background-color: #e0e0e0;
+  border-radius: 50px;
+  border: 2px solid rgb(206, 206, 206);
+  box-shadow: inset 4px 4px 5px #bcbcbc,
+              inset -4px -4px 5px #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .buttonCV:hover {
+    box-shadow: inset 2px 2px 4px #bcbcbc,
+                inset -2px -2px 4px #ffffff,
+                2px 2px 4px #bcbcbc,
+                -2px -2px 4px #ffffff;
+  }
+}
+
+@keyframes slide-ltr {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes slide-rtl {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(33.333%); }
+}
+
+.animate-slide-ltr {
+  animation: slide-ltr 25s linear infinite;
+}
+
+.animate-slide-rtl {
+  animation: slide-rtl 25s linear infinite;
+}

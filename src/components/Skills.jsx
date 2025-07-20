@@ -1,47 +1,47 @@
-import React from 'react'
-import liquid from '../assets/liquid.png';
-import bootstrap from '../assets/bootstrap.png';
-import javascript from '../assets/javascript.png';
-import tailwind from '../assets/tailwind.png';
-import react from '../assets/react.png';
-import { useTranslation } from 'react-i18next'
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+import liquid from "../assets/liquid.png";
+import bootstrap from "../assets/bootstrap.png";
+import javascript from "../assets/javascript.png";
+import tailwind from "../assets/tailwind.png";
+import react from "../assets/react.png";
+import html from "../assets/html.png";
+import css from "../assets/css.png";
+
+const skillsList = [
+  { name: "HTML", img: html },
+  { name: "CSS", img: css },
+  { name: "Javascript", img: javascript },
+  { name: "Bootstrap", img: bootstrap },
+  { name: "Tailwind", img: tailwind },
+  { name: "React", img: react },
+  { name: "Liquid", img: liquid },
+];
 
 const Skills = () => {
-      const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+
+  // تكرار العناصر مرتين لتجنب الفراغ
+  const repeatedSkills = [...skillsList, ...skillsList, ...skillsList];
 
   return (
-    <div className='border border-gray-600 bg-black text-gray-400 md:h-[150px] max-w-[1200px] mx-auto grid grid-cols-6 place-items-center md:flex md:justify-between md:items-center'>
+    <div className="max-w-[1200px] mx-auto my-12 overflow-hidden" id="skills">
+      <h2 className="text-4xl font-bold pb-4 mb-3 mx-6 primary-color">{t("skills_description")}</h2>
 
-        <h2 className='text-gray-700 text-xl md:text-4xl font-bold m-4'dangerouslySetInnerHTML={{ __html: t("skills_description") }}>
-        </h2>
-
-        <div className='flex flex-col items-center m-4 sm:my-0 w-[40px] md:w-[100px]'>
-          <img src={liquid} alt="" width={100} height={100} />
-          <p className='mt-2'>Liquid</p>
+      <div className="relative w-full py-6 bg-black text-gray-400 overflow-hidden border border-gray-600">
+        <div className={`flex gap-12 w-max items-center px-4 ${isArabic ? "animate-slide-rtl" : "animate-slide-ltr"}`}>
+          {repeatedSkills.map((skill, index) => (
+            <div key={index} className="flex flex-col items-center min-w-[70px] sm:min-w-[90px] md:min-w-[110px]">
+              <img src={skill.img} alt={skill.name} className="w-14 sm:w-16 md:w-20" />
+              <p className="mt-2 text-sm">{skill.name}</p>
+            </div>
+          ))} {/* map */}
         </div>
-        
-        <div className='flex flex-col items-center m-4 sm:my-0 w-[40px] md:w-[100px]'>
-          <img src={bootstrap} alt="" width={100} height={100} />
-          <p className='mt-2'>Bootstrap</p>
-        </div>
-        
-        <div className='flex flex-col items-center m-4 sm:my-0 w-[40px] md:w-[100px]'>
-          <img src={javascript} alt="" width={100} height={100} />
-          <p className='mt-2'>Javascript</p>
-        </div>
-        
-        <div className='flex flex-col items-center m-4 sm:my-0 w-[40px] md:w-[100px]'>
-          <img src={tailwind} alt="" width={100} height={100} />
-          <p className='mt-2'>Tailwind</p>
-        </div>
-        
-        <div className='flex flex-col items-center m-4 sm:my-0 w-[40px] md:w-[100px]'>
-          <img src={react} alt="" width={100} height={100} />
-          <p className='mt-2'>React</p>
-        </div>
-        
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Skills
+export default Skills;

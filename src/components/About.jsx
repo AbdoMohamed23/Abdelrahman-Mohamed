@@ -12,7 +12,7 @@ const About = () => {
 
             <div className='mt-4 md:mt-0 text-start flex'>
                 <div className='my-auto mx-6'>
-                    <h2 className='text-4xl font-bold mb-4 primary-color'>{t("about_title")}</h2>
+                    <h2 className='text-4xl font-bold pb-4 primary-color'>{t("about_title")}</h2>
                     <p className='text-base lg:text-lg'>{t("about_description")}</p>
                 </div>
             </div>

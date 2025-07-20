@@ -1,12 +1,7 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
-import About from './components/About'
-import BottomNav from './components/BottomNav'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import Hero from './components/Hero'
-import Navbar from './components/Navbar'
-import Skills from './components/Skills'
-import Work from './components/Work'
+import Home from './components/Home'
+import CV from './components/CV'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -20,14 +15,12 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <Hero />
-      <Skills />
-      <About />
-      <Work />
-      <Contact />
-      <Footer />
-      <BottomNav />
+      <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cv" element={<CV />} />
+          </Routes>
+      </Router>
     </>
   )
 }
