@@ -1,5 +1,5 @@
 import React from 'react'
-import aboutImg from '../assets/Hero-Sec.jpg'
+import aboutImg from '../assets/hero-section.jpg'
 import { useTranslation } from 'react-i18next'
 
 const About = () => {
