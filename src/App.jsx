@@ -1,5 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import './App.css'
+import { BrowserRouter, Routes , Route } from 'react-router-dom'
 import Home from './components/Home'
 import CV from './components/CV'
 import { useEffect } from 'react'
@@ -14,14 +13,12 @@ function App() {
   }, [i18n.language])
 
   return (
-    <>
-      <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cv" element={<CV />} />
-          </Routes>
-      </Router>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cv" element={<CV />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
