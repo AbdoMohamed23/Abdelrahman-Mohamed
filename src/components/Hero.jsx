@@ -1,4 +1,3 @@
-import React from 'react';
 import heroimage from '../assets/heroSec.jpg';
 import { TypeAnimation } from 'react-type-animation';
 import { useTranslation } from 'react-i18next'

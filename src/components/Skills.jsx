@@ -1,10 +1,9 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import liquid from "../assets/liquid.png";
 import bootstrap from "../assets/bootstrap.png";
 import javascript from "../assets/javascript.png";
-import tailwind from "../assets/tailwind.png";
+import tailwind from "../assets/tailwind.webp";
 import react from "../assets/react.png";
 import html from "../assets/html.png";
 import css from "../assets/css.png";

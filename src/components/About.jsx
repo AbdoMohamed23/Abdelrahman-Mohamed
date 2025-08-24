@@ -1,9 +1,8 @@
-import React from 'react'
 import aboutImg from '../assets/hero-section.jpg'
 import { useTranslation } from 'react-i18next'
 
 const About = () => {
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
 
   return (
     <div className='text-white max-w-[1200px] mx-auto my-12' id='about'>

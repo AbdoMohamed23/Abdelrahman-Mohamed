@@ -1,14 +1,13 @@
-import React from 'react'
 import proj1 from '../assets/arino.png'
-import proj2 from '../assets/movies.png'
+import proj2 from '../assets/movies.webp'
 import proj3 from '../assets/portfolio.png'
 import proj4 from '../assets/portfolio2.png'
 import proj5 from '../assets/leaves.png'
-import proj6 from '../assets/restaurant.png'
+import proj6 from '../assets/restaurant.webp'
 import { useTranslation } from 'react-i18next'
 
 const Work = () => {
-      const { t, i18n } = useTranslation()
+      const { t } = useTranslation()
   return (
     <div className='max-w-[1200px] min-h-[70vh] mx-auto p-5' id='work'>
       <div className='pb-8'>

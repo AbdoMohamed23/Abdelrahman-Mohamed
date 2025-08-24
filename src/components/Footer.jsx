@@ -1,8 +1,7 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
-      const { t, i18n } = useTranslation()
+      const { t } = useTranslation()
   
   return (
     <div className='max-w-[1200px] sm:h-[150px] p-12 flex justify-between mx-auto sm:mb-0 mb-10'>

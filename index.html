@@ -1,19 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Basic SEO -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdo | Web Developer</title>
+    <meta name="description" content="Portfolio of Abdo, a Web Developer specializing in React, Shopify, and SEO-friendly websites." />
+    <meta name="keywords" content="Abdo, Web Developer, React, Shopify, Portfolio, SEO" />
+    <link rel="canonical" href="https://abdelrahman-mohamed-rep.netlify.app/" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/public/favicon-32x32.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#03081C"/>
-  <!-- Cairo Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <title>Portfolio | Abdo</title>
-</head>
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:title" content="Abdo | Web Developer" />
+    <meta property="og:description" content="I am a Web Developer specialized in React, Shopify, and SEO. Check out my portfolio and projects." />
+    <meta property="og:image" content="https://abdelrahman-mohamed-rep.netlify.app/profileImg.jpg" />
+    <meta property="og:url" content="https://abdelrahman-mohamed-rep.netlify.app/" />
+    <meta property="og:type" content="website" />
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Abdo | Web Developer" />
+    <meta name="twitter:description" content="React, Shopify, and SEO-focused Web Developer. Explore my work." />
+    <meta name="twitter:image" content="https://abdelrahman-mohamed-rep.netlify.app/profileImg.jpg" />
 
+    <!-- Cairo Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Schema Markup (Structured Data for SEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Person",
+        "name": "Abdelrahman Mohamed",
+        "url": "https://abdelrahman-mohamed-rep.netlify.app/",
+        "sameAs": [
+          "https://www.linkedin.com/in/abdelrahman-mohamed-09490136b",
+          "https://github.com/AbdoMohamed23"
+        ],
+        "jobTitle": "Web Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelancer"
+        }
+      }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73GNMR3ZKK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-73GNMR3ZKK');
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
