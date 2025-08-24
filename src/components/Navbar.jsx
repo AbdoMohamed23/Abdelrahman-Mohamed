@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [nav, setNav] = useState(false)
@@ -70,9 +69,9 @@ const Navbar = () => {
       >
         <h1 className="text-3xl primary-color mb-4">{t("text_name")}</h1>
         <ul className="space-y-4 text-xl">
-          <li><Link to="/about" onClick={() => setNav(false)}>{t("about")}</Link></li>
-          <li><Link to="/work" onClick={() => setNav(false)}>{t("work")}</Link></li>
-          <li><Link to="/contact" onClick={() => setNav(false)}>{t("contact")}</Link></li>
+          <li><a href="#about" onClick={() => setNav(false)}>{t("about")}</a></li>
+          <li><a href="#work" onClick={() => setNav(false)}>{t("work")}</a></li>
+          <li><a href="#contact" onClick={() => setNav(false)}>{t("contact")}</a></li>
           <li>
             <button
               onClick={toggleLanguage}

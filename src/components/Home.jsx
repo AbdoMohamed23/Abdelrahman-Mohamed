@@ -9,8 +9,8 @@ import BottomNav from './BottomNav'
 
 const Home = () => {
   return (
-      <>
-      <Navbar />    
+    <>
+      <Navbar />
       <Hero />
       <Skills />
       <About />
