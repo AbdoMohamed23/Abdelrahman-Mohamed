@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        short_name: 'My App',
+        short_name: 'Developer_Abdo',
         name: 'My Progressive Web App',
         icons: [
           {

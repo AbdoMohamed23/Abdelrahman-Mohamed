@@ -22,11 +22,11 @@ const Hero = () => {
                     />
                 </h1>
 
-                <p className='text-white sm:text-lg my-6 lg:text-xl mb-6' dangerouslySetInnerHTML={{ __html: t("hero_description") }}/>
+                <p className='text-white sm:text-lg my-6 lg:text-xl mb-6' dangerouslySetInnerHTML={{ __html: t("hero_description") }} />
 
 
                 <div className='mt-2'>
-                    <a href="/Abdo-CV.pdf" download={"Abdo-CV.pdf"} className='px-6 py-3 w-full rounded-xl me-4 bg-gradient-to-br bg-primary-color text-white'>{t("download_cv")}</a>
+                    <a href="/Abdelrahman-Dev.pdf" download={"Abdelrahman-Dev.pdf"} className='px-6 py-3 w-full rounded-xl me-4 bg-gradient-to-br bg-primary-color text-white'>{t("download_cv")}</a>
                     <Link to="/CV" className='px-6 py-3 w-full rounded-xl border border-gray-400 hover:bg-gradient-to-r from-[#707e32] to-[#5CD2B9] hover:border-none text-white'> {t('cv_title')}</Link>
                 </div>
 
