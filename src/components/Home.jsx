@@ -1,4 +1,4 @@
-import Navbar from './Navbar'
+import Header from './Header'
 import Hero from './Hero'
 import Skills from './Skills'
 import About from './About'
@@ -10,7 +10,7 @@ import BottomNav from './BottomNav'
 const Home = () => {
   return (
     <>
-      <Navbar />
+      <Header />
       <Hero />
       <Skills />
       <About />

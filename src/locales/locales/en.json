@@ -11,19 +11,30 @@
     "hero_description": "Front-End<br/>React.js, Vue.js, JavaScript (ES6+), Tailwind CSS، Bootstrap<br/>Back-End: Node.js, APIs<br/>Version Control: Git, GitHub",
     "download_cv": "Download CV",
     "work_movies": "Movies",
+    "work_movies_des": "A movie search application that allows users to search for movies, view details, and explore popular films using the OMDB API.",
     "work_leaves": "Designs",
+    "work_leaves_des": "A leaf recognition app that identifies different types of leaves using image processing and machine learning techniques.",
     "work_restaurant": "Restaurant",
+    "work_restaurant_des": "A restaurant website featuring a menu, reservation system, and contact information with a visually appealing design.",
     "work_arino": "Company",
+    "work_arino_des": "Responsive website template for agencies and businesses to showcase services, projects, and connect with clients.",
     "work_portfolio": "portfolio",
+    "work_portfolio_des": "A personal portfolio website to showcase projects, skills, and experiences with a clean and modern design.",
     "work_live": "Live",
     "work_description": "Check out some of my work",
+
     "text_contact": "Contact Me",
     "text_contact_whatsapp": "Contact me via WhatsApp",
     "text_contact_email": "Contact me via Email",
     "text_contact_linked": "Contact me via LinkedIn",
+
     "skills_description": "My tech stack",
+
     "about_title": "About me",
-    "about_description": "I'm Abdulrahman, a front-end developer specializing in designing and developing websites and e-commerce stores such as Shopify, Wix, Zid, and NicePage. I have experience designing landing pages, landing pages, and large-scale projects, with a focus on improving performance and user experience. I have strong front-end development skills using React.js and Next.js, with proficiency in HTML, CSS, JavaScript, and frameworks like Bootstrap and Tailwind CSS. I also have experience working with Node.js and Strapi to create dynamic and scalable websites. I always strive to deliver clean and organized code, paying attention to the smallest details to ensure a smooth user experience and high performance. I have experience in search engine optimization (SEO) and e-commerce optimization in terms of speed, design, and integration with various tools. I strive to provide professional solutions tailored to clients' needs, whether in designing and customizing templates and themes or building distinct, responsive websites that work efficiently across all devices.",
+    "about_description_1": "I’m Abdelrahman, a Front-End Developer specialized in designing and developing websites and e-commerce stores such as Shopify, Wix, Zid, and NicePage. I have experience building landing pages, personal websites, and large-scale projects with a strong focus on performance and user experience",
+    "about_description_2": "I have solid expertise in building user interfaces with React.js and Next.js, along with strong skills in HTML, CSS, and JavaScript, and frameworks like Bootstrap and Tailwind CSS. I also have experience with Node.js and Strapi to create dynamic and scalable websites, in addition to supporting multilingual websites using i18n",
+    "about_description_3": "I always aim to write clean and well-structured code with great attention to detail, ensuring smooth user experiences and high performance. I also have experience in SEO optimization, e-commerce performance improvements, design enhancements, and tool integrations, providing professional, responsive solutions tailored to client needs",
+
 
     
 

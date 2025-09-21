@@ -2,9 +2,11 @@ import { AiFillHome, AiOutlineMail } from "react-icons/ai";
 import { BsBriefcase } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { BiGlobe } from "react-icons/bi"; // أيقونة اللغة 🌐
+import { useState } from "react";
+import { MdOutlineRoundaboutRight } from "react-icons/md";
 
 const BottomNav = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const currentLang = i18n.language;
   const toggleLang = () => {
     const newLang = currentLang === "ar" ? "en" : "ar";
@@ -12,41 +14,42 @@ const BottomNav = () => {
     document.dir = newLang === "ar" ? "rtl" : "ltr";
   };
 
-  return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 sm:hidden backdrop-blur-lg border-t border-white/20 px-6 py-3 rounded-t-2xl flex justify-around text-white text-sm">
-      <NavItem icon={<AiFillHome size={24} />} label={t("home")} link="#hero" />
-      <NavItem
-        icon={<BsBriefcase size={22} />}
-        label={t("work")}
-        link="#work"
-      />
-      <NavItem
-        icon={<AiOutlineMail size={24} />}
-        label={t("contact")}
-        link="#contact"
-      />
+  const [activeLink, setActiveLink] = useState('#')
 
-      {/* 🌐 زر اللغة */}
-      <button
-        onClick={toggleLang}
-        className="flex flex-col items-center relative cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
-      >
-        <BiGlobe size={22} />
-        <span className="mt-1 text-xs text-white/80">{t("language")}</span>
-      </button>
-    </div>
-  );
-};
-
-// 🔸 عنصر تنقل قابل للنقر
-const NavItem = ({ icon, label, link }) => {
   return (
-    <a href={link}>
-      <div className="flex flex-col items-center relative transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer">
-        {icon}
-        <span className="mt-1 text-xs text-white/80">{label}</span>
-      </div>
-    </a>
+    <main className="fixed bottom-0 left-0 right-0 z-50 md:hidden backdrop-blur-lg border-t border-primary/50 px-6 py-3 rounded-t-2xl flex justify-around text-white text-sm">
+      <ul className="flex justify-around w-full">
+        <li>
+          <a href="#" onClick={() => setActiveLink('#')}
+            className={`px-3 py-1 rounded-full flex ${activeLink === '#' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+            <AiFillHome size={22} />
+          </a>
+        </li>
+        <li>
+          <a href="#about" onClick={() => setActiveLink('#about')}
+            className={`px-3 py-1 rounded-full flex ${activeLink === '#about' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+            <MdOutlineRoundaboutRight size={22} />
+          </a>
+        </li>
+        <li>
+          <a href="#work" onClick={() => setActiveLink('#work')}
+            className={`px-3 py-1 rounded-full flex ${activeLink === '#work' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+            <BsBriefcase size={22} />
+          </a>
+        </li>
+        <li>
+          <a href="#contact" onClick={() => setActiveLink('#contact')}
+            className={`px-3 py-1 rounded-full flex ${activeLink === '#contact' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+            <AiOutlineMail size={24} />
+          </a>
+        </li>
+        <li>
+          <button onClick={toggleLang} className="text-slate-200 hover:text-primary rounded-full px-3 py-1">
+            <BiGlobe size={22} />
+          </button>
+        </li>
+      </ul>
+    </main>
   );
 };
 
