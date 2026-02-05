@@ -3,11 +3,6 @@ import Home from './components/Home'
 import CV from './components/CV'
 import Login from './components/admin/Login'
 import Dashboard from './components/admin/Dashboard'
-import Projects from './components/admin/Projects'
-import Skills from './components/admin/Skills'
-import Contacts from './components/admin/Contacts'
-import AboutSettings from './components/admin/AboutSettings'
-import Settings from './components/admin/Settings'
 import ProtectedRoute from './components/ProtectedRoute'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -108,7 +103,7 @@ function App() {
               {/* Loading Text */}
               <div className='text-center space-y-3'>
                 <h2 className='text-3xl font-bold text-primary dark:text-white animate-pulse'>D. A. M</h2>
-                <p className='text-gray-600 dark:text-gray-400 text-sm font-medium'>جاري التحميل...</p>
+                <p className='text-gray-600 dark:text-gray-400 text-sm font-medium'>Loading...</p>
               </div>
 
               {/* Advanced Spinner */}
@@ -144,11 +139,6 @@ function App() {
             {/* Admin Routes */}
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/admin/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
-            <Route path="/admin/skills" element={<ProtectedRoute><Skills /></ProtectedRoute>} />
-            <Route path="/admin/about" element={<ProtectedRoute><AboutSettings /></ProtectedRoute>} />
-            <Route path="/admin/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-            <Route path="/admin/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
