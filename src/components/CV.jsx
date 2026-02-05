@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 // import profileImage from '../assets/Hero-Sec.jpg';
 
 const CV = () => {
   const { t, i18n } = useTranslation();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -11,18 +13,17 @@ const CV = () => {
     const newLang = i18n.language === "ar" ? "en" : "ar";
     i18n.changeLanguage(newLang);
     localStorage.setItem("i18nextLng", newLang);
-    const newPath = location.pathname.replace(`//(ar|en)/, /${newLang}`);
-    navigate(newPath);
+    document.dir = newLang === "ar" ? "rtl" : "ltr";
   };
 
   const isArabic = i18n.language === "ar";
 
   return (
-    <section dir={isArabic ? "rtl" : "ltr"} className="sm:min-h-screen bg-white text-gray-800 sm:py-2">
+    <section dir={isArabic ? "rtl" : "ltr"} className={`sm:min-h-screen ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-800'} sm:py-2`}>
       {" "}
-      <div className="max-w-4xl mx-auto shadow-lg border sm:rounded-lg overflow-hidden">
+      <div className={`max-w-4xl mx-auto shadow-lg border sm:rounded-lg overflow-hidden ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
         {/* Header with toggle */}
-        <div className="bg-[#fff] text-black px-6 py-5 flex flex-row items-center gap-6">
+        <div className={`${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'} px-6 py-5 flex flex-row items-center gap-6`}>
           {/* <img
         src={profileImage}
         alt="Profile"
@@ -43,17 +44,17 @@ const CV = () => {
         </div>
 
         {/* Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
           {/* About */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("about_title")}</h2>
-            <p className="text-sm mt-2">{t("aboutTextCV")}</p>
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("about_title")}</h2>
+            <p className={`text-sm mt-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>{t("aboutTextCV")}</p>
           </div>
 
           {/* Education */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("education")}</h2>
-            <ul className="text-sm mt-2 list-disc list-inside">
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("education")}</h2>
+            <ul className={`text-sm mt-2 list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
               <li>{t("edu1")}</li>
               <li>{t("edu2")}</li>
             </ul>
@@ -61,30 +62,30 @@ const CV = () => {
 
           {/* Skills */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("skills")}</h2>
-            <ul className="text-sm mt-2 list-disc list-inside">
-              <li>React.js</li>
-              <li>JavaScript</li>
-              <li>Tailwind CSS / Bootstrap</li>
-              <li>Routing (React Router)</li>
-              <li>Multi-language Sites with i18next</li>
-              <li>Responsive Design</li>
-              <li>AI-assisted research and content planning</li>
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("skills")}</h2>
+            <ul className={`text-sm mt-2 list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
+              <li>React.js, HTML, CSS, JavaScript (ES6+)</li>
+              <li>Tailwind CSS & Bootstrap</li>
+              <li>Laravel, PHP, Node.js</li>
+              <li>MySQL Database & APIs</li>
+              <li>i18next (Multi-language Support)</li>
+              <li>Responsive & Mobile-First Design</li>
+              <li>Git & GitHub Version Control</li>
             </ul>
           </div>
 
           {/* Experience */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("experience")}</h2>
-            <ul className="text-sm mt-2 list-disc list-inside">
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("experience")}</h2>
+            <ul className={`text-sm mt-2 list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
               <li>{t("exp1")}</li>
             </ul>
           </div>
 
           {/* Freelance Projects */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("freelance", "Freelance Projects")}</h2>
-            <ul className="text-sm mt-2 list-disc list-inside">
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("freelance", "Freelance Projects")}</h2>
+            <ul className={`text-sm mt-2 list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
               <li>{t("freelance1")}</li>
               <li>{t("freelance2")}</li>
               <li>{t("freelance3")}</li>
@@ -94,8 +95,8 @@ const CV = () => {
 
           {/* Languages */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("languages")}</h2>
-            <ul className="text-sm mt-2 list-disc list-inside">
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("languages")}</h2>
+            <ul className={`text-sm mt-2 list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
               <li>{t("lang1")}</li>
               <li>{t("lang2")}</li>
             </ul>
@@ -103,8 +104,8 @@ const CV = () => {
 
           {/* Certificates */}
           <div>
-            <h2 className="font-semibold text-[#1e3a5f]">{t("certificates")}</h2>
-            <ul className="text-sm mt-2 list-disc list-inside">
+            <h2 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-[#1e3a5f]'}`}>{t("certificates")}</h2>
+            <ul className={`text-sm mt-2 list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-800'}`}>
               <li>{t("cert1")}</li>
               {/* <li>{t('cert2')}</li>
           <li>{t('cert3')}</li> */}

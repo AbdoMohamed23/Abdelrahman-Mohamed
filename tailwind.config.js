@@ -4,18 +4,23 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         cairo: ['Cairo', 'sans-serif'],
       },
       colors: {
-        'primary': '#B91C1C', // Red-700 ,d13e38 the old
-        'sec_primary': '#161616',
-        'contact': '#090C14', // Gray-900/50 with opacity ,1D1D1D the old
+        'primary': '#017FD3',
+        'light_': '#f8f9fa',
+        'off-white': '#f5f6f7',
+        'dark_': '#0f120f',
+        'sec_primary': '#f9fafb',
+        'contact': '#090C14',
       },
     },
   },
   plugins: [],
 }
+
 

@@ -6,9 +6,9 @@
     "contact": "Contact",
     "language": "Language",
     "hero_title": "M7LAWY 🏴‍☠",
-    "hero_role1": "Frontend Dev",
-    "hero_role2": "Web Designer",
-    "hero_description": "Front-End<br/>React.js, Vue.js, JavaScript (ES6+), Tailwind CSS، Bootstrap<br/>Back-End: Node.js, APIs<br/>Version Control: Git, GitHub",
+    "hero_role1": "Full Stack Developer",
+    "hero_role2": "E-Commerce dev",
+    "hero_description": "Web developer specialized in designing and developing websites and e-commerce stores<br/>Frontend: React.js, HTML, CSS, JavaScript, Tailwind CSS, Bootstrap<br/>Backend: Laravel, PHP, Node.js, MySQL<br/>Platforms: Shopify, Wix, Zid - RTL/LTR Support",
     "download_cv": "Download CV",
     "work_movies": "Movies",
     "work_movies_des": "A movie search application that allows users to search for movies, view details, and explore popular films using the OMDB API.",
@@ -22,52 +22,49 @@
     "work_portfolio_des": "A personal portfolio website to showcase projects, skills, and experiences with a clean and modern design.",
     "work_live": "Live",
     "work_description": "Check out some of my work",
-
     "text_contact": "Contact Me",
     "text_contact_whatsapp": "Contact me via WhatsApp",
     "text_contact_email": "Contact me via Email",
     "text_contact_linked": "Contact me via LinkedIn",
-
-    "skills_description": "My tech stack",
-
+    "follow_me": "Follow Me",
+    "skills_description": "My Tech Stack",
+    "skills_subtitle": "Professional tools and frameworks for building high-quality web solutions",
     "about_title": "About me",
-    "about_description_1": "I’m Abdelrahman, a Front-End Developer specialized in designing and developing websites and e-commerce stores such as Shopify, Wix, Zid, and NicePage. I have experience building landing pages, personal websites, and large-scale projects with a strong focus on performance and user experience",
-    "about_description_2": "I have solid expertise in building user interfaces with React.js and Next.js, along with strong skills in HTML, CSS, and JavaScript, and frameworks like Bootstrap and Tailwind CSS. I also have experience with Node.js and Strapi to create dynamic and scalable websites, in addition to supporting multilingual websites using i18n",
-    "about_description_3": "I always aim to write clean and well-structured code with great attention to detail, ensuring smooth user experiences and high performance. I also have experience in SEO optimization, e-commerce performance improvements, design enhancements, and tool integrations, providing professional, responsive solutions tailored to client needs",
-
-
-    
-
-
+    "about_subtitle": "Specialist in building integrated web solutions with a focus on performance, quality, and precise details",
+    "about_label_1": "Overall Vision",
+    "about_label_2": "Frontend Development",
+    "about_label_3": "Backend Systems",
+    "about_label_4": "E-Commerce Stores",
+    "about_icon_1": "fa-rocket",
+    "about_icon_2": "fa-code",
+    "about_icon_3": "fa-database",
+    "about_icon_4": "fa-shopping-cart",
+    "about_description_1": "Full Stack Web Developer specialized in designing and developing websites and e-commerce stores with a focus on performance and user experience. I work on platforms like Shopify, Wix, and Zid, implementing landing pages, informational websites, and integrated, responsive web projects across all devices.",
+    "about_description_2": "On the front-end, I have strong expertise in React.js, HTML, CSS, and JavaScript, using Tailwind CSS and Bootstrap to design modern, organized, and user-friendly interfaces. I'm deeply passionate about user experience, website performance, and precise design implementation that serves the brand and visual identity.",
+    "about_description_3": "On the backend, I've worked with Laravel and PHP, building authentication systems, user management, CRUD operations, and database connections using MySQL, while maintaining clean code and following best practices. I also have knowledge of Node.js and Strapi for building dynamic websites, APIs, and supporting multilingual content.",
+    "about_description_4": "In Shopify, I fully customize themes, adjust language and direction (RTL/LTR), and develop custom sections using Liquid, CSS, and JavaScript, while improving store speed, SEO, and integrating external services and applications. I always focus on clean code, precise details, and building practical solutions that make it easy for clients to manage their projects and deliver professional user experiences to end-users.",
     "cv_title": "Veiw CV",
-    "jobTitle": "Frontend Developer",
-    "aboutTextCV": "Frontend developer with strong skills in building responsive web interfaces using React, Tailwind, and JavaScript. Passionate about UI/UX and clean design.",
+    "jobTitle": "Full Stack Developer",
+    "aboutTextCV": "Full Stack Developer with strong experience building modern interfaces using React.js, HTML, CSS, and JavaScript with Tailwind and Bootstrap, and developing backend systems with Laravel, PHP, and Node.js, including MySQL database integration. Focused on performance, user experience, and clean code following best practices.",
     "disCV": "Mahalla El-Kubra, Egypt | abdomohamed@gmail.com | +201149270139",
-    
     "education": "Education",
     "edu1": "Delta Higher Institute for Computers and Information – Mansoura",
     "edu2": "B.Sc. in Business Information Systems",
-
     "skills": "Skills",
     "experience": "Experience",
-    "exp1": "Frontend Developer – 2023-Present",
-
+    "exp1": "Web Development – 2023 – Present",
     "freelance": "Freelance Projects",
     "freelance1": "Developed landing pages and custom sections for Shopify stores.",
     "freelance2": "Built multi-language websites using React and i18next.",
     "freelance3": "Customized Wix, Shopify, and Nicepage stores based on client needs.",
     "freelance4": "Implemented sliders, forms, and interactive sections using pure CSS and Liquid.",
-
     "languages": "Languages",
     "lang1": "Arabic – Native",
     "lang2": "English – Professional",
-
     "certificates": "Certificates",
-    "cert1": "Frontend Development Diploma",
+    "cert1": "Web Development Diploma",
     "cert2": "FreeCodeCamp Frontend Certificate",
     "cert3": "Google UX Certificate",
-
-
     "footer_title": "D. A.M",
     "footer_des": "Designed & Developed by Abdo-Mohamed"
 }

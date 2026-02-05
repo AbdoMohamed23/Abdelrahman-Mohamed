@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'
+import { BsSun, BsMoon } from 'react-icons/bs'
 import { useTranslation } from 'react-i18next'
+import { useTheme } from '../context/ThemeContext'
 
 const Header = () => {
   const [nav, setNav] = useState(false)
   const menuRef = useRef(null)
   const { t, i18n } = useTranslation()
+  const { theme, toggleTheme } = useTheme()
   const isArabic = i18n.language === 'ar'
 
   const handleNav = () => setNav(!nav)
@@ -43,31 +46,34 @@ const Header = () => {
       )}
 
       {/* ✅ Header desktop */}
-      <div className="max-w-[900px] flex md:fixed justify-between items-center mx-4 mt-4 md:mt-0 md:mx-auto top-4 inset-0 bg-black/20 backdrop-blur-md px-3 md:px-12 h-[60px] text-gray-400 border rounded-full border-gray-600 z-20">
+      <div className="max-w-[900px] flex md:fixed justify-between items-center mx-4 mt-4 md:mt-0 md:mx-auto top-4 inset-0 bg-white/30 dark:bg-black/20 backdrop-blur-md px-3 md:px-12 h-[60px] text-gray-600 dark:text-gray-400 border rounded-full border-gray-300 dark:border-gray-600 z-20">
         <h1 className="text-3xl font-bold text-primary ms-4">{t("text_name")}</h1>
         <ul className="hidden md:flex space-x-4 items-center">
           <li>
             <a href="#" onClick={() => setActiveLink('#')}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("home")}</a>
           </li>
           <li>
             <a href="#about" onClick={() => setActiveLink('#about')}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#about' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#about' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("about")}</a>
           </li>
           <li>
             <a href="#work" onClick={() => setActiveLink('#work')}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#work' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#work' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("work")}</a>
           </li>
           <li>
             <a href="#contact" onClick={() => setActiveLink('#contact')}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#contact' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#contact' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("contact")}</a>
           </li>
-          <li className="">
-            <button onClick={toggleLanguage} className="text-slate-200 font-semibold hover:text-primary rounded-full px-3 py-0.5">
+          <li className="flex items-center gap-2">
+            <button onClick={toggleTheme} className="text-slate-700 dark:text-slate-200 font-semibold hover:text-primary rounded-full px-2 py-0.5 transition-colors">
+              {theme === 'dark' ? <BsSun size={18} /> : <BsMoon size={18} />}
+            </button>
+            <button onClick={toggleLanguage} className="text-slate-700 dark:text-slate-200 font-semibold hover:text-primary rounded-full px-3 py-0.5">
               {i18n.language === 'ar' ? 'EN' : 'AR'}
             </button>
           </li>
@@ -80,35 +86,39 @@ const Header = () => {
       {/* ✅ قائمة الموبايل الناعمة */}
       <div
         ref={menuRef}
-        className={`fixed top-6 ${isArabic ? 'left-4' : 'right-4'} w-[80%] text-white bg-contact rounded-xl shadow-lg p-6 z-30 transition-all duration-500 ease-in-out ${nav ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+        className={`fixed top-6 ${isArabic ? 'left-4' : 'right-4'} w-[80%] text-black dark:text-white bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 z-30 transition-all duration-500 ease-in-out ${nav ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
           }`}
       >
         <h1 className="text-3xl text-primary border-b border-b-primary pb-2 mb-5">{t("text_name")}</h1>
         <ul className="flex flex-col gap-4 text-xl py-3">
           <li>
             <a href="#" onClick={() => { setActiveLink('#'), setNav(false) }}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("home")}</a>
           </li>
           <li>
             <a href="#about" onClick={() => { setActiveLink('#about'), setNav(false) }}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#about' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#about' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("about")}</a>
           </li>
           <li>
             <a href="#work" onClick={() => { setActiveLink('#work'), setNav(false) }}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#work' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#work' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("work")}</a>
           </li>
           <li>
             <a href="#contact" onClick={() => { setActiveLink('#contact'), setNav(false) }}
-              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#contact' ? 'bg-primary/20 text-primary' : 'text-slate-200 hover:text-primary'}`}>
+              className={`px-3 py-1 rounded-full font-semibold transition-colors ${activeLink === '#contact' ? 'bg-primary/20 text-primary' : 'text-slate-700 dark:text-slate-200 hover:text-primary'}`}>
               {t("contact")}</a>
           </li>
-          <li className="">
-            <button onClick={toggleLanguage} className="text-slate-200 font-semibold hover:text-primary rounded-full px-3 py-0.5">
+          <li className="flex items-center gap-2">
+            <button onClick={toggleTheme} className="text-slate-700 dark:text-slate-200 font-semibold hover:text-primary rounded-full px-2 py-0.5 transition-colors">
+              {theme === 'dark' ? <BsSun size={18} /> : <BsMoon size={18} />}
+            </button>
+            <button onClick={toggleLanguage} className="text-slate-700 dark:text-slate-200 font-semibold hover:text-primary rounded-full px-3 py-0.5">
               {i18n.language === 'ar' ? 'EN' : 'AR'}
             </button>
+
           </li>
         </ul>
       </div>

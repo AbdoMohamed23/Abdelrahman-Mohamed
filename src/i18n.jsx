@@ -17,7 +17,6 @@ i18n
     resources,
     fallbackLng: "ar",
     detection: {
-      // 👇 دي أهم حاجة
       order: ['localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage'],
     },

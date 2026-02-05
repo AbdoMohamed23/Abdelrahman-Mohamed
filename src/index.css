@@ -2,14 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Loading Screen Animations */
+@keyframes slideProgress {
+  0% {
+    width: 20%;
+  }
 
+  50% {
+    width: 80%;
+  }
+
+  100% {
+    width: 20%;
+  }
+}
+
+/* Animations for Skills Section */
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.line-1 {
+  animation: slideRight 4s ease-in-out infinite;
+}
+
+.line-2 {
+  animation: slideLeft 4.5s ease-in-out infinite;
+}
+
+.line-3 {
+  animation: slideDown 5s ease-in-out infinite;
+}
+
+/* ✅ Light Mode (Default) */
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  background-color: #000000;
+  background-color: #f5f6f7;
+  color: #000000;
   font-family: 'Cairo', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ✅ Dark Mode */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #0f120f;
+  color: #ffffff;
 }
 
 .cursorInteraction {
@@ -20,10 +109,20 @@ body {
 }
 
 .buttonCV {
-  color: #4d4d4d;
+  color: #ffffff;
   padding: 5px 20px;
-  background-color: #e0e0e0;
+  background-color: #333333;
   border-radius: 50px;
+  border: 2px solid rgb(100, 100, 100);
+  box-shadow: inset 4px 4px 5px #1a1a1a,
+    inset -4px -4px 5px #4d4d4d;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Light Mode Button */
+html:not(.dark) .buttonCV {
+  color: #4d4d4d;
+  background-color: #e0e0e0;
   border: 2px solid rgb(206, 206, 206);
   box-shadow: inset 4px 4px 5px #bcbcbc,
     inset -4px -4px 5px #ffffff;
@@ -31,6 +130,13 @@ body {
 
 @media screen and (min-width: 768px) {
   .buttonCV:hover {
+    box-shadow: inset 2px 2px 4px #1a1a1a,
+      inset -2px -2px 4px #4d4d4d,
+      2px 2px 4px #1a1a1a,
+      -2px -2px 4px #4d4d4d;
+  }
+
+  html:not(.dark) .buttonCV:hover {
     box-shadow: inset 2px 2px 4px #bcbcbc,
       inset -2px -2px 4px #ffffff,
       2px 2px 4px #bcbcbc,
