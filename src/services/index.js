@@ -59,7 +59,9 @@ export const projectService = {
     },
 
     async update(id, data) {
-        const response = await api.put(`/admin/projects/${id}`, data, {
+        // Use POST with _method override for file uploads
+        data.append('_method', 'PUT')
+        const response = await api.post(`/admin/projects/${id}`, data, {
             headers: { 'Content-Type': 'multipart/form-data' }
         })
         return response.data

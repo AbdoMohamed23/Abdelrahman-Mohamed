@@ -10,7 +10,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
-  const { i18n } = useTranslation()
+  useTranslation()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {

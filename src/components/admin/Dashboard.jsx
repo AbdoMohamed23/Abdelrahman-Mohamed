@@ -8,6 +8,10 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true)
     const [showModal, setShowModal] = useState(false)
     const [editingProject, setEditingProject] = useState(null)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [deletingProject, setDeletingProject] = useState(null)
+    const [showPreviewModal, setShowPreviewModal] = useState(false)
+    const [previewProject, setPreviewProject] = useState(null)
     const [formData, setFormData] = useState({
         title_en: '',
         title_ar: '',
@@ -15,10 +19,9 @@ const Dashboard = () => {
         description_ar: '',
         demo_url: '',
         github_url: '',
-        technologies: [],
+        image: null,
         order: 0,
-        is_active: true,
-        image: null
+        is_active: true
     })
 
     useEffect(() => {
@@ -41,14 +44,15 @@ const Dashboard = () => {
         try {
             const formDataToSend = new FormData()
             Object.keys(formData).forEach(key => {
-                if (key === 'technologies') {
-                    formDataToSend.append(key, JSON.stringify(formData[key]))
-                } else if (key === 'image' && formData[key]) {
+                if (key === 'image' && formData[key]) {
                     formDataToSend.append(key, formData[key])
-                } else if (formData[key] !== null) {
+                    console.log('Image file:', formData[key])
+                } else if (formData[key] !== null && key !== 'image') {
                     formDataToSend.append(key, formData[key])
                 }
             })
+
+            console.log('FormData entries:', Array.from(formDataToSend.entries()))
 
             if (editingProject) {
                 await projectService.update(editingProject.id, formDataToSend)
@@ -61,20 +65,44 @@ const Dashboard = () => {
             resetForm()
         } catch (error) {
             console.error('Error saving project:', error)
-            alert('فشل حفظ المشروع')
+            alert('حدث خطأ: ' + (error.response?.data?.message || error.message))
         }
     }
 
     const handleDelete = async (id) => {
-        if (confirm('هل أنت متأكد من حذف هذا المشروع؟')) {
-            try {
-                await projectService.delete(id)
-                loadProjects()
-            } catch (error) {
-                console.error('Error deleting project:', error)
-                alert('فشل حذف المشروع')
-            }
+        try {
+            await projectService.delete(id)
+            loadProjects()
+        } catch (error) {
+            console.error('Error deleting project:', error)
         }
+    }
+
+    const openDeleteModal = (project) => {
+        setDeletingProject(project)
+        setShowDeleteModal(true)
+    }
+
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false)
+        setDeletingProject(null)
+    }
+
+    const confirmDelete = async () => {
+        if (!deletingProject) return
+        await handleDelete(deletingProject.id)
+        closeDeleteModal()
+    }
+
+    const openPreviewModal = (project) => {
+        if (!project?.demo_url) return
+        setPreviewProject(project)
+        setShowPreviewModal(true)
+    }
+
+    const closePreviewModal = () => {
+        setShowPreviewModal(false)
+        setPreviewProject(null)
     }
 
     const handleEdit = (project) => {
@@ -86,10 +114,9 @@ const Dashboard = () => {
             description_ar: project.description_ar,
             demo_url: project.demo_url || '',
             github_url: project.github_url || '',
-            technologies: project.technologies || [],
+            image: null,
             order: project.order,
-            is_active: project.is_active,
-            image: null
+            is_active: project.is_active
         })
         setShowModal(true)
     }
@@ -103,71 +130,84 @@ const Dashboard = () => {
             description_ar: '',
             demo_url: '',
             github_url: '',
-            technologies: [],
+            image: null,
             order: 0,
-            is_active: true,
-            image: null
+            is_active: true
         })
     }
 
     return (
         <AdminLayout>
-            <div className="space-y-6">
+            <div className="max-w-6xl mx-auto space-y-6">
+                {/* Header */}
                 <div className="flex justify-between items-center">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">إدارة المشاريع</h1>
+                    <h1 className="text-2xl font-bold text-yellow-500">المشاريع</h1>
                     <button
                         onClick={() => {
                             resetForm()
                             setShowModal(true)
                         }}
-                        className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/30"
+                        className="flex items-center gap-2 px-4 py-2 bg-yellow-600/20 hover:bg-yellow-600/30 text-yellow-400 border border-yellow-600/30 rounded-lg transition-colors text-sm"
                     >
-                        <FiPlus /> إضافة مشروع
+                        <FiPlus size={18} /> مشروع جديد
                     </button>
                 </div>
 
+                {/* Projects List */}
                 {loading ? (
-                    <div className="text-center py-12 text-gray-900 dark:text-white">جاري التحميل...</div>
+                    <div className="text-center py-20 text-gray-400">جاري التحميل...</div>
+                ) : projects.length === 0 ? (
+                    <div className="text-center py-20 text-gray-500">لا توجد مشاريع</div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {projects.map((project) => (
                             <div
                                 key={project.id}
-                                className="bg-white dark:bg-dark_bg rounded-2xl overflow-hidden border border-gray-200 dark:border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                                className="bg-gray-900 rounded-lg overflow-hidden border border-yellow-600/20 hover:border-yellow-600/40 transition-colors"
                             >
                                 {project.image && (
                                     <img
                                         src={`http://localhost:8000/storage/${project.image}`}
                                         alt={project.title_en}
-                                        className="w-full h-48 object-cover"
+                                        className="w-full h-40 object-cover"
                                     />
                                 )}
-                                <div className="p-5">
-                                    <div className="flex items-start justify-between mb-3">
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{project.title_ar}</h3>
-                                        <div className="flex items-center gap-1">
-                                            {project.is_active ? (
-                                                <FiEye className="text-green-500" />
+                                <div className="p-4 space-y-3">
+                                    <div className="flex items-start justify-between gap-2">
+                                        <h3 className="text-white font-medium text-sm">{project.title_ar}</h3>
+                                        <div className="flex items-center gap-2">
+                                            <span className={`text-[10px] px-2 py-0.5 rounded-full border ${project.is_active ? 'text-yellow-300 border-yellow-600/30 bg-yellow-600/10' : 'text-gray-400 border-gray-700 bg-gray-800'}`}>
+                                                {project.is_active ? 'نشط' : 'غير نشط'}
+                                            </span>
+                                            {project.demo_url ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => openPreviewModal(project)}
+                                                    className="text-yellow-400 hover:text-yellow-300"
+                                                    title="معاينة"
+                                                >
+                                                    <FiEye size={16} />
+                                                </button>
                                             ) : (
-                                                <FiEyeOff className="text-gray-400" />
+                                                <FiEyeOff className="text-gray-600" size={16} />
                                             )}
                                         </div>
                                     </div>
-                                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                                    <p className="text-gray-400 text-xs line-clamp-2">
                                         {project.description_ar}
                                     </p>
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 pt-2">
                                         <button
                                             onClick={() => handleEdit(project)}
-                                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 text-sm font-medium"
+                                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-yellow-600/20 hover:bg-yellow-600/30 text-yellow-300 border border-yellow-600/30 rounded text-xs transition-colors"
                                         >
-                                            <FiEdit2 size={16} /> تعديل
+                                            <FiEdit2 size={14} /> تعديل
                                         </button>
                                         <button
-                                            onClick={() => handleDelete(project.id)}
-                                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-300 text-sm font-medium"
+                                            onClick={() => openDeleteModal(project)}
+                                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded text-xs transition-colors"
                                         >
-                                            <FiTrash2 size={16} /> حذف
+                                            <FiTrash2 size={14} /> حذف
                                         </button>
                                     </div>
                                 </div>
@@ -179,120 +219,122 @@ const Dashboard = () => {
 
             {/* Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-white dark:bg-dark_bg rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-                        <div className="p-6 border-b border-gray-200 dark:border-primary/20">
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                                {editingProject ? 'تعديل المشروع' : 'إضافة مشروع جديد'}
+                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div className="bg-gray-900 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-yellow-600/20 shadow-2xl">
+                        <div className="p-4 border-b border-yellow-600/20 flex items-center justify-between">
+                            <h2 className="text-lg font-bold text-yellow-400">
+                                {editingProject ? 'تعديل المشروع' : 'مشروع جديد'}
                             </h2>
+                            <span className="text-xs text-gray-400">لوحة التحكم</span>
                         </div>
-                        <form onSubmit={handleSubmit} className="p-6 space-y-5">
-                            <div className="grid grid-cols-2 gap-4">
+                        <form onSubmit={handleSubmit} className="p-4 space-y-4">
+                            <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
+                                    <label className="block text-gray-300 text-xs font-medium mb-1.5">
                                         العنوان (عربي)
                                     </label>
                                     <input
                                         type="text"
                                         value={formData.title_ar}
                                         onChange={(e) => setFormData({ ...formData, title_ar: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:border-yellow-500 focus:outline-none"
                                         required
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
+                                    <label className="block text-gray-300 text-xs font-medium mb-1.5">
                                         العنوان (English)
                                     </label>
                                     <input
                                         type="text"
                                         value={formData.title_en}
                                         onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:border-yellow-500 focus:outline-none"
                                         required
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
+                                <label className="block text-gray-300 text-xs font-medium mb-1.5">
                                     الوصف (عربي)
                                 </label>
                                 <textarea
                                     value={formData.description_ar}
                                     onChange={(e) => setFormData({ ...formData, description_ar: e.target.value })}
-                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                                    rows="3"
+                                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:border-yellow-500 focus:outline-none"
+                                    rows="2"
                                     required
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
+                                <label className="block text-gray-300 text-xs font-medium mb-1.5">
                                     الوصف (English)
                                 </label>
                                 <textarea
                                     value={formData.description_en}
                                     onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
-                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                                    rows="3"
+                                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:border-yellow-500 focus:outline-none"
+                                    rows="2"
                                     required
                                 />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
-                                        رابط العرض التوضيحي
+                                    <label className="block text-gray-300 text-xs font-medium mb-1.5">
+                                        رابط Demo
                                     </label>
                                     <input
                                         type="url"
                                         value={formData.demo_url}
                                         onChange={(e) => setFormData({ ...formData, demo_url: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:border-yellow-500 focus:outline-none"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
+                                    <label className="block text-gray-300 text-xs font-medium mb-1.5">
                                         رابط GitHub
                                     </label>
                                     <input
                                         type="url"
                                         value={formData.github_url}
                                         onChange={(e) => setFormData({ ...formData, github_url: e.target.value })}
-                                        className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:border-yellow-500 focus:outline-none"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">
+                                <label className="block text-gray-300 text-xs font-medium mb-1.5">
                                     الصورة
                                 </label>
                                 <input
                                     type="file"
                                     accept="image/*"
                                     onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
-                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-dark_ border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 transition-all"
+                                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-gray-700 file:text-white hover:file:bg-gray-600"
                                 />
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={formData.is_active}
-                                        onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                                        className="w-5 h-5 text-primary rounded focus:ring-2 focus:ring-primary/20"
-                                    />
-                                    <span className="font-medium">نشط</span>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="is_active"
+                                    checked={formData.is_active}
+                                    onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
+                                    className="w-4 h-4 rounded bg-gray-700 border-gray-600"
+                                />
+                                <label htmlFor="is_active" className="text-gray-300 text-sm cursor-pointer">
+                                    نشط
                                 </label>
                             </div>
 
-                            <div className="flex gap-4 pt-4">
+                            <div className="flex gap-3 pt-2">
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg shadow-primary/30"
+                                    className="flex-1 py-2 bg-yellow-600/20 hover:bg-yellow-600/30 text-yellow-300 border border-yellow-600/30 rounded text-sm font-medium transition-colors"
                                 >
                                     حفظ
                                 </button>
@@ -302,7 +344,7 @@ const Dashboard = () => {
                                         setShowModal(false)
                                         resetForm()
                                     }}
-                                    className="flex-1 py-3 bg-gray-200 dark:bg-dark_ text-gray-900 dark:text-white rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300 font-medium"
+                                    className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded text-sm font-medium transition-colors"
                                 >
                                     إلغاء
                                 </button>
@@ -311,89 +353,85 @@ const Dashboard = () => {
                     </div>
                 </div>
             )}
-        </AdminLayout>
-    )
-}
 
-export default Dashboard
-            icon: FiTool,
-            color: 'from-purple-600 to-purple-400',
-            link: '/admin/skills'
-        },
-        {
-            title: 'الرسائل',
-            value: stats.contacts,
-            icon: FiMail,
-            color: 'from-green-600 to-green-400',
-            link: '/admin/contacts'
-        },
-        {
-            title: 'رسائل غير مقروءة',
-            value: stats.unreadContacts,
-            icon: FiActivity,
-            color: 'from-red-600 to-red-400',
-            link: '/admin/contacts'
-        }
-    ]
-
-    return (
-        <AdminLayout>
-            <div className="space-y-8">
-                <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">لوحة التحكم</h1>
-                    <p className="text-gray-400">مرحباً بك في لوحة التحكم الخاصة بك</p>
-                </div>
-
-                {loading ? (
-                    <div className="text-center py-12">
-                        <div className="text-white text-xl">جاري التحميل...</div>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {statCards.map((card, index) => (
-                            <div
-                                key={index}
-                                className="bg-gray-800 rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition"
+            {showDeleteModal && (
+                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div className="bg-gray-900 rounded-lg w-full max-w-md border border-yellow-600/20">
+                        <div className="p-4 border-b border-yellow-600/20">
+                            <h2 className="text-base font-bold text-yellow-400">تأكيد الحذف</h2>
+                        </div>
+                        <div className="p-4">
+                            <p className="text-sm text-gray-300">
+                                هل تريد حذف المشروع
+                                <span className="text-yellow-300"> {deletingProject?.title_ar}</span> ؟
+                            </p>
+                        </div>
+                        <div className="p-4 pt-0 flex gap-3">
+                            <button
+                                onClick={confirmDelete}
+                                className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded text-sm font-medium transition-colors"
                             >
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className={`p-3 rounded-lg bg-gradient-to-br ${card.color}`}>
-                                        <card.icon size={24} className="text-white" />
-                                    </div>
-                                    <div className="text-3xl font-bold text-white">{card.value}</div>
-                                </div>
-                                <h3 className="text-gray-300 text-lg">{card.title}</h3>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <div className="bg-gray-800 rounded-xl p-6 border border-purple-500/20">
-                    <h2 className="text-xl font-bold text-white mb-4">إجراءات سريعة</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <a
-                            href="/admin/projects"
-                            className="p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition text-center"
-                        >
-                            <FiFolder size={32} className="text-blue-400 mx-auto mb-2" />
-                            <div className="text-white font-medium">إضافة مشروع</div>
-                        </a>
-                        <a
-                            href="/admin/skills"
-                            className="p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition text-center"
-                        >
-                            <FiTool size={32} className="text-purple-400 mx-auto mb-2" />
-                            <div className="text-white font-medium">إضافة مهارة</div>
-                        </a>
-                        <a
-                            href="/admin/contacts"
-                            className="p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition text-center"
-                        >
-                            <FiMail size={32} className="text-green-400 mx-auto mb-2" />
-                            <div className="text-white font-medium">عرض الرسائل</div>
-                        </a>
+                                حذف
+                            </button>
+                            <button
+                                onClick={closeDeleteModal}
+                                className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded text-sm font-medium transition-colors"
+                            >
+                                إلغاء
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
+
+            {showPreviewModal && (
+                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+                    <div className="bg-gray-900 rounded-xl w-full max-w-3xl border border-yellow-600/20 shadow-2xl overflow-hidden">
+                        <div className="p-4 border-b border-yellow-600/20 flex items-center justify-between">
+                            <h2 className="text-base font-bold text-yellow-400">معاينة المشروع</h2>
+                            <button
+                                onClick={closePreviewModal}
+                                className="text-gray-300 hover:text-white text-sm"
+                            >
+                                إغلاق
+                            </button>
+                        </div>
+                        <div className="p-6">
+                            {previewProject ? (
+                                <div className="max-w-[520px] mx-auto">
+                                    <div className="group relative overflow-hidden rounded-2xl border border-primary/30 hover:border-primary/60 transition-all duration-500 bg-gray-50 dark:bg-contact/40">
+                                        <div className="relative w-full overflow-hidden bg-black/5">
+                                            {previewProject.image ? (
+                                                <img
+                                                    src={`http://localhost:8000/storage/${previewProject.image}`}
+                                                    alt={previewProject.title_ar}
+                                                    className="w-full h-auto object-contain"
+                                                    loading="lazy"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-48 bg-gray-800 flex items-center justify-center text-gray-400 text-sm">
+                                                    لا توجد صورة
+                                                </div>
+                                            )}
+                                            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary to-primary/0"></div>
+                                        </div>
+                                        <div className="p-6 flex flex-col gap-3">
+                                            <h3 className="text-xl font-bold text-primary dark:text-primary/90">
+                                                {previewProject.title_ar}
+                                            </h3>
+                                            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                                                {previewProject.description_ar}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="p-6 text-center text-gray-400">لا توجد بيانات للعرض</div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </AdminLayout>
     )
 }
