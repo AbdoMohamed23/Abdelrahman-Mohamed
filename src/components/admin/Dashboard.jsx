@@ -4,8 +4,6 @@ import { projectService } from '../../services'
 import { FiPlus, FiEdit2, FiTrash2, FiEye, FiEyeOff } from 'react-icons/fi'
 
 const Dashboard = () => {
-    const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:8000'
-
     const [projects, setProjects] = useState([])
     const [loading, setLoading] = useState(true)
     const [showModal, setShowModal] = useState(false)
@@ -169,7 +167,7 @@ const Dashboard = () => {
                             >
                                 {project.image && (
                                     <img
-                                        src={`${API_BASE}/storage/${project.image}`}
+                                        src={project.image_url}
                                         alt={project.title_en}
                                         className="w-full h-40 object-cover"
                                     />
@@ -405,7 +403,7 @@ const Dashboard = () => {
                                         <div className="relative w-full overflow-hidden bg-black/5">
                                             {previewProject.image ? (
                                                 <img
-                                                    src={`${API_BASE}/storage/${previewProject.image}`}
+                                                    src={previewProject.image_url}
                                                     alt={previewProject.title_ar}
                                                     className="w-full h-auto object-contain"
                                                     loading="lazy"

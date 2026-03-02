@@ -1,23 +1,31 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
-import CV from './components/CV'
-import Login from './components/admin/Login'
-import Dashboard from './components/admin/Dashboard'
-import ProtectedRoute from './components/ProtectedRoute'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ThemeProvider } from './context/ThemeContext'
 import { AuthProvider } from './context/AuthContext'
+
+// Lazy load components
+import Home from './components/Home'
+const CV = lazy(() => import('./components/CV'))
+const Login = lazy(() => import('./components/admin/Login'))
+const Dashboard = lazy(() => import('./components/admin/Dashboard'))
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
+
+// Loading component
+const PageLoader = () => (
+  <div className='fixed inset-0 bg-white dark:bg-dark_ flex items-center justify-center'>
+    <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-primary'></div>
+  </div>
+)
 
 function App() {
   useTranslation()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // محاكاة تحميل الموقع
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2000)
+    }, 1000) // تقليل وقت التحميل من 2000 لـ 1000
 
     return () => clearTimeout(timer)
   }, [])
@@ -74,14 +82,16 @@ function App() {
         )}
 
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cv" element={<CV />} />
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cv" element={<CV />} />
 
-            {/* Admin Routes */}
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          </Routes>
+              {/* Admin Routes */}
+              <Route path="/admin/login" element={<Login />} />
+              <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
