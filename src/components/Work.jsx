@@ -24,10 +24,12 @@ const Work = () => {
     }
   }
 
+  const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:8000'
+
   const works = projects.map((project) => ({
     id: project.id,
     title: i18n.language === 'ar' ? project.title_ar : project.title_en,
-    image: project.image ? `http://localhost:8000/storage/${project.image}` : '',
+    image: project.image ? `${API_BASE}/storage/${project.image}` : '',
     description: i18n.language === 'ar' ? project.description_ar : project.description_en,
     link: project.demo_url || '#'
   }))

@@ -22,64 +22,6 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
 
-  // ✅ لا نغير direction هنا، سيتم تطبيقه محلياً في كل صفحة
-
-  useEffect(() => {
-    // ✅ منع النسخ والـ right click على الموقع كله
-    const handleCopy = (e) => {
-      e.preventDefault()
-      return false
-    }
-
-    const handleContextMenu = (e) => {
-      e.preventDefault()
-      return false
-    }
-
-    const handleSelectStart = (e) => {
-      e.preventDefault()
-      return false
-    }
-
-    const handleMouseDown = (e) => {
-      if (e.button === 2) { // Right click
-        e.preventDefault()
-        return false
-      }
-    }
-
-    const handleKeyDown = (e) => {
-      // منع Ctrl+C, Ctrl+A, Ctrl+X, Ctrl+V
-      if (e.ctrlKey || e.metaKey) {
-        if (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A' ||
-          e.key === 'x' || e.key === 'X' || e.key === 'v' || e.key === 'V') {
-          e.preventDefault()
-          return false
-        }
-      }
-    }
-
-    // تطبيق CSS
-    document.body.style.userSelect = 'none'
-    document.body.style.WebkitUserSelect = 'none'
-    document.body.style.msUserSelect = 'none'
-
-    document.addEventListener('copy', handleCopy)
-    document.addEventListener('contextmenu', handleContextMenu)
-    document.addEventListener('selectstart', handleSelectStart)
-    document.addEventListener('mousedown', handleMouseDown)
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('copy', handleCopy)
-      document.removeEventListener('contextmenu', handleContextMenu)
-      document.removeEventListener('selectstart', handleSelectStart)
-      document.removeEventListener('mousedown', handleMouseDown)
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.userSelect = 'auto'
-    }
-  }, [])
-
   return (
     <ThemeProvider>
       <AuthProvider>
