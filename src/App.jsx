@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { ThemeProvider } from './context/ThemeContext'
 import { AuthProvider } from './context/AuthContext'
 
-// Lazy load components
-import Home from './components/Home'
+// Lazy load ALL components for faster initial load
+const Home = lazy(() => import('./components/Home'))
 const CV = lazy(() => import('./components/CV'))
 const Login = lazy(() => import('./components/admin/Login'))
 const Dashboard = lazy(() => import('./components/admin/Dashboard'))
@@ -23,9 +23,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Faster loading - reduced from 1000ms to 600ms
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 1000) // تقليل وقت التحميل من 2000 لـ 1000
+    }, 600)
 
     return () => clearTimeout(timer)
   }, [])

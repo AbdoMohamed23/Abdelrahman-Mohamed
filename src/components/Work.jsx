@@ -17,8 +17,6 @@ const Work = () => {
       // Filter only active projects and sort by order
       const activeProjects = data.filter(p => p.is_active).sort((a, b) => a.order - b.order)
       setProjects(activeProjects)
-    } catch (error) {
-      console.error('Error loading projects:', error)
     } finally {
       setLoading(false)
     }

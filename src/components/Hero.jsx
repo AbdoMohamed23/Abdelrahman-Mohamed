@@ -35,7 +35,14 @@ const Hero = () => {
 
                 </div>
                 <div className='col-span-1 order-1 md:order-2'>
-                    <img className='rounded-full shadow-xl shadow-primary/80' src={hero_image} alt={t("text_name")} />
+                    <img 
+                        className='rounded-full shadow-xl shadow-primary/80' 
+                        src={hero_image} 
+                        alt={t("text_name")}
+                        loading='eager'
+                        fetchPriority='high'
+                        decoding='async'
+                    />
                 </div>
             </div>
         </main>

@@ -46,13 +46,10 @@ const Dashboard = () => {
             Object.keys(formData).forEach(key => {
                 if (key === 'image' && formData[key]) {
                     formDataToSend.append(key, formData[key])
-                    console.log('Image file:', formData[key])
                 } else if (formData[key] !== null && key !== 'image') {
                     formDataToSend.append(key, formData[key])
                 }
             })
-
-            console.log('FormData entries:', Array.from(formDataToSend.entries()))
 
             if (editingProject) {
                 await projectService.update(editingProject.id, formDataToSend)
@@ -64,7 +61,6 @@ const Dashboard = () => {
             setShowModal(false)
             resetForm()
         } catch (error) {
-            console.error('Error saving project:', error)
             alert('حدث خطأ: ' + (error.response?.data?.message || error.message))
         }
     }
@@ -74,7 +70,7 @@ const Dashboard = () => {
             await projectService.delete(id)
             loadProjects()
         } catch (error) {
-            console.error('Error deleting project:', error)
+            alert('خطأ في حذف المشروع')
         }
     }
 

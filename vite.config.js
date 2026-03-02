@@ -40,7 +40,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['react-icons', 'framer-motion']
+          'ui-vendor': ['react-icons', 'framer-motion'],
+          'i18n-vendor': ['i18next', 'react-i18next', 'i18next-browser-languagedetector']
         }
       }
     },
@@ -49,8 +50,11 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug']
       }
-    }
+    },
+    cssCodeSplit: true,
+    sourcemap: false
   }
 })
